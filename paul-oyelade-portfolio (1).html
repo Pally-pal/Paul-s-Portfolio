@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul Oyelade — Software Engineer · Data/ML · Blockchain Security</title>
+<meta name="description" content="Portfolio of Paul Oluwafemi Oyelade — full-stack development, data science/ML engineering, and blockchain security.">
+<link rel="icon" href="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_a9852ec7-181e-47f4-9199-9b556af62fd0.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1815;
+    --panel:#10241F;
+    --panel-2:#132B24;
+    --coral:#FF6B4D;
+    --coral-dim: rgba(255,107,77,0.35);
+    --cream:#F5EFE6;
+    --cream-dim: rgba(245,239,230,0.62);
+    --line: rgba(245,239,230,0.12);
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:0.02em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* background grain/texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(255,107,77,0.06), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255,107,77,0.05), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    backdrop-filter: blur(10px);
+    background:rgba(11,24,21,0.55);
+    border-bottom:1px solid var(--line);
+    transition: background .3s ease;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{width:30px; height:30px; border-radius:8px;}
+  .brand span{font-family:'Space Grotesk'; font-weight:600; font-size:15px; letter-spacing:0.02em;}
+  nav .links{display:flex; gap:26px; font-size:13px;}
+  nav .links a{
+    color:var(--cream-dim); text-transform:uppercase; letter-spacing:0.08em; font-size:11px; font-family:'IBM Plex Mono';
+    position:relative; padding-bottom:4px; transition:color .25s;
+  }
+  nav .links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--coral);
+    transition:width .3s ease;
+  }
+  nav .links a:hover{color:var(--cream);}
+  nav .links a:hover::after{width:100%;}
+  @media (max-width:640px){ nav .links{display:none;} }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    padding:120px 24px 80px;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_4187cfc4-b1c4-466f-8e09-9d7940e1d4d1.png');
+    background-size:cover; background-position:center;
+    opacity:0.55;
+    will-change: transform;
+    transform: translateY(0) scale(1.08);
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(11,24,21,0.35) 0%, rgba(11,24,21,0.55) 55%, var(--ink) 100%);
+  }
+  .hero-content{ position:relative; z-index:2; max-width:760px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--coral); margin-bottom:22px; display:inline-block;
+    opacity:0; transform:translateY(10px); animation:fadeUp .9s ease forwards .2s;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem); line-height:1.04; margin-bottom:22px;
+    opacity:0; transform:translateY(16px); animation:fadeUp 1s ease forwards .4s;
+  }
+  .hero h1 .accent{color:var(--coral);}
+  .hero p{
+    font-size:clamp(1rem, 2vw, 1.2rem); color:var(--cream-dim); max-width:560px; margin:0 auto 34px;
+    opacity:0; transform:translateY(16px); animation:fadeUp 1s ease forwards .6s;
+  }
+  .hero-ctas{
+    display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
+    opacity:0; transform:translateY(16px); animation:fadeUp 1s ease forwards .8s;
+  }
+  @keyframes fadeUp{ to{ opacity:1; transform:translateY(0); } }
+
+  .btn{
+    font-family:'IBM Plex Mono'; font-size:13px; letter-spacing:0.04em;
+    padding:13px 26px; border-radius:999px; border:1px solid var(--line);
+    transition:all .25s ease; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background:var(--coral); color:var(--ink); border-color:var(--coral); font-weight:500;}
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 30px -10px var(--coral-dim);}
+  .btn-ghost{ color:var(--cream); }
+  .btn-ghost:hover{ border-color:var(--coral); color:var(--coral); }
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--cream-dim); letter-spacing:0.15em;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    animation:bob 2.2s ease-in-out infinite;
+    z-index:2;
+  }
+  .scroll-cue .bar{width:1px; height:28px; background:linear-gradient(var(--coral), transparent);}
+  @keyframes bob{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,8px);} }
+
+  /* SECTION GENERIC */
+  section{ position:relative; z-index:1; padding:120px 0; }
+  .section-head{ margin-bottom:56px; }
+  .section-head .tag{
+    font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--coral); margin-bottom:14px; display:block;
+  }
+  .section-head h2{ font-size:clamp(1.8rem, 4vw, 2.6rem); }
+
+  .reveal{ opacity:0; transform:translateY(30px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* PROFILE */
+  .profile-grid{ display:grid; grid-template-columns:260px 1fr; gap:56px; align-items:start; }
+  .portrait{
+    position:relative; width:100%; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
+    border:1px solid var(--coral-dim);
+  }
+  .portrait img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.92) contrast(1.02); }
+  .portrait::after{
+    content:""; position:absolute; inset:0; border-radius:20px;
+    background:linear-gradient(180deg, transparent 55%, rgba(11,24,21,0.55) 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,107,77,0.15);
+  }
+  .portrait .corner{
+    position:absolute; top:14px; right:14px; width:10px; height:10px; border-radius:50%;
+    background:var(--coral); box-shadow:0 0 12px 2px var(--coral-dim);
+  }
+  .profile p{ font-size:1.08rem; color:var(--cream-dim); max-width:640px; }
+  .profile .stats{ display:flex; gap:48px; margin-top:44px; flex-wrap:wrap; }
+  .stats .stat{ }
+  .stats .stat .num{ font-family:'Space Grotesk'; font-size:2.1rem; color:var(--coral); font-weight:600; }
+  .stats .stat .label{ font-family:'IBM Plex Mono'; font-size:11px; color:var(--cream-dim); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;}
+  @media (max-width:720px){ .profile-grid{ grid-template-columns:1fr; } .portrait{ max-width:220px; } }
+
+  /* SKILLS */
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+  .skill-card{
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:18px; padding:32px;
+    transition:transform .35s ease, border-color .35s ease;
+  }
+  .skill-card:hover{ transform:translateY(-6px); border-color:var(--coral-dim); }
+  .skill-card img{ width:56px; height:56px; border-radius:12px; margin-bottom:20px; object-fit:cover; }
+  .skill-card h3{ font-size:1.2rem; margin-bottom:10px; }
+  .skill-card p{ color:var(--cream-dim); font-size:0.94rem; margin-bottom:16px; }
+  .tag-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag-list span{
+    font-family:'IBM Plex Mono'; font-size:10.5px; color:var(--cream);
+    border:1px solid var(--line); padding:5px 10px; border-radius:999px;
+    background:rgba(245,239,230,0.03);
+  }
+
+  /* PROJECTS */
+  .project{
+    display:grid; grid-template-columns:180px 2fr; gap:28px;
+    padding:32px 0; border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .project:last-child{ border-bottom:1px solid var(--line); }
+  .project .p-thumb{
+    width:100%; aspect-ratio:4/3; border-radius:12px; overflow:hidden;
+    border:1px solid var(--line); background:var(--panel);
+  }
+  .project .p-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .project .p-index{ font-family:'IBM Plex Mono'; color:var(--coral); font-size:13px; display:block; margin-top:10px; }
+  .project h3{ font-size:1.3rem; margin:6px 0 12px; }
+  .project .p-stack{ font-family:'IBM Plex Mono'; font-size:11px; color:var(--cream-dim); margin-bottom:14px; display:block; }
+  .project p{ color:var(--cream-dim); font-size:0.98rem; }
+  @media (max-width:720px){ .project{grid-template-columns:1fr;} }
+
+  /* EDUCATION */
+  .edu-card{
+    border:1px solid var(--line); border-radius:18px; padding:36px;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap;
+  }
+  .edu-card h3{ font-size:1.25rem; margin-bottom:8px; }
+  .edu-card .meta{ color:var(--cream-dim); font-size:0.95rem; }
+  .edu-card .badge{
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--coral); border:1px solid var(--coral-dim);
+    padding:6px 14px; border-radius:999px; white-space:nowrap;
+  }
+
+  /* CONTACT / FOOTER */
+  footer{
+    padding:100px 0 50px; text-align:center; position:relative; z-index:1;
+    border-top:1px solid var(--line); margin-top:40px;
+  }
+  footer h2{ font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:20px; }
+  footer p{ color:var(--cream-dim); max-width:480px; margin:0 auto 34px; }
+  .footer-links{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+  .copyright{ font-family:'IBM Plex Mono'; font-size:11px; color:var(--cream-dim); letter-spacing:0.04em; }
+
+  ::selection{ background:var(--coral); color:var(--ink); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_a9852ec7-181e-47f4-9199-9b556af62fd0.png" alt="PO monogram">
+    <span>Paul Oyelade</span>
+  </div>
+  <div class="links">
+    <a href="#profile">Profile</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Full-Stack &middot; Data / ML &middot; Blockchain Security</span>
+    <h1>Systems, not <span class="accent">silos</span>.</h1>
+    <p>I build production-ready software across three disciplines — web platforms, data/ML pipelines, and blockchain security — and ship them end to end, not just prototype them.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-ghost" href="./Paul_Oyelade_CV.docx" download>Download CV</a>
+      <a class="btn btn-ghost" href="mailto:oluwafemipaul35@gmail.com">Contact Me</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><span class="bar"></span></div>
+</section>
+
+<section id="profile">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="tag">01 — Profile</span>
+      <h2>Computer Science graduate, multidisciplinary engineer.</h2>
+    </div>
+    <div class="profile-grid profile">
+      <div class="portrait">
+        <img src="assets/profile.jpg" alt="Paul Oluwafemi Oyelade">
+        <span class="corner"></span>
+      </div>
+      <div>
+        <p>I move comfortably from a React/Flask web app, to a Solidity smart contract, to a time-series forecasting model — often in the same week. My focus is shipping complete systems (frontend, backend, database, cloud) under real constraints, not just building demos. Computer Science graduate of Osun State University, Osogbo, Nigeria.</p>
+        <div class="stats">
+          <div class="stat"><div class="num">3</div><div class="label">Disciplines</div></div>
+          <div class="stat"><div class="num">12+</div><div class="label">Shipped Projects</div></div>
+          <div class="stat"><div class="num">5</div><div class="label">Production Defects Resolved Solo</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">02 — Core Skills</span>
+      <h2>Three modules, one engineer.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_2a1cb407-2af9-4dba-a4a2-409b8401ee7a.png" alt="Full-stack icon">
+        <h3>Full-Stack Development</h3>
+        <p>End-to-end web platforms — from schema to deploy.</p>
+        <div class="tag-list">
+          <span>React.js</span><span>Node.js / TS</span><span>Flask</span><span>PostgreSQL</span><span>Supabase</span><span>REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_4187cfc4-b1c4-466f-8e09-9d7940e1d4d1.png" alt="Data ML icon" style="object-position:center;">
+        <h3>Data Science / ML Engineering</h3>
+        <p>Forecasting, classification, and trading analytics pipelines.</p>
+        <div class="tag-list">
+          <span>Python</span><span>pandas / NumPy</span><span>scikit-learn</span><span>Time-Series</span><span>NLP</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_2b781a4a-bd3e-41c7-9a89-376a2f8d1b62.png" alt="Blockchain security icon">
+        <h3>Blockchain &amp; Security</h3>
+        <p>Smart contracts and distributed-ledger data integrity systems.</p>
+        <div class="tag-list">
+          <span>Solidity</span><span>Hardhat</span><span>Web3.py</span><span>Ethereum</span><span>Applied Crypto</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">03 — Selected Projects</span>
+      <h2>Shipped, not just prototyped.</h2>
+    </div>
+
+    <div class="project reveal">
+      <div>
+        <div class="p-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_2b781a4a-bd3e-41c7-9a89-376a2f8d1b62.png" alt="Blockchain IoT Security preview"></div>
+        <span class="p-index">01</span>
+      </div>
+      <div>
+        <h3>Blockchain-Based IoT Security System</h3>
+        <span class="p-stack">Solidity · Hardhat · Flask · Web3.py · Ethereum (Sepolia)</span>
+        <p>Graduation project: a distributed-ledger system that verifies IoT sensor data integrity, using smart contracts to detect tampering before it reaches downstream systems. Taken from local Hardhat testing through full production deployment on Render, including credential-security and environment-configuration hardening.</p>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div>
+        <div class="p-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_2a1cb407-2af9-4dba-a4a2-409b8401ee7a.png" alt="Photography Recommender preview"></div>
+        <span class="p-index">02</span>
+      </div>
+      <div>
+        <h3>Photography &amp; Videography Equipment Recommender</h3>
+        <span class="p-stack">React.js · Flask · PostgreSQL · Supabase</span>
+        <p>Full-stack recommendation engine suggesting camera/video gear based on user needs. Migrated the production database from Render Postgres to Supabase with zero data loss and resolved five distinct deployment defects post-launch.</p>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div>
+        <div class="p-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_4187cfc4-b1c4-466f-8e09-9d7940e1d4d1.png" alt="Algorithmic Trading Bot preview"></div>
+        <span class="p-index">03</span>
+      </div>
+      <div>
+        <h3>Algorithmic Trading Bot</h3>
+        <span class="p-stack">Python</span>
+        <p>A scalping bot for GOLD and BTC that executes trades automatically against live market signals.</p>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div>
+        <div class="p-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_4187cfc4-b1c4-466f-8e09-9d7940e1d4d1.png" alt="Market Regime Detection preview" style="filter:hue-rotate(18deg) saturate(1.25);"></div>
+        <span class="p-index">04</span>
+      </div>
+      <div>
+        <h3>Market Regime Detection System</h3>
+        <span class="p-stack">Python · Machine Learning</span>
+        <p>An ML pipeline that classifies market conditions — trending, ranging, or volatile — to support trading-strategy selection.</p>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div>
+        <div class="p-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HbjygsVEgOAeqF6OE40iBCeZMX/hf_20260809_064036_4187cfc4-b1c4-466f-8e09-9d7940e1d4d1.png" alt="Email Spam Detection preview" style="filter:hue-rotate(-16deg) brightness(0.92);"></div>
+        <span class="p-index">05</span>
+      </div>
+      <div>
+        <h3>Email Spam Detection</h3>
+        <span class="p-stack">Python · scikit-learn</span>
+        <p>A tuned text-classification model that flags spam, built with feature engineering from raw email fields.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">04 — Education</span>
+      <h2>Foundations.</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div>
+        <h3>B.Sc. Computer Science</h3>
+        <div class="meta">Osun State University, Osogbo, Nigeria</div>
+        <div class="meta" style="margin-top:6px;">Graduation project: Blockchain-Based IoT Security System</div>
+      </div>
+      <div class="badge">Graduate</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap reveal">
+    <span class="tag" style="display:block; text-align:center;">05 — Contact</span>
+    <h2>Let's build something.</h2>
+    <p>Open to freelance, internship, and full-time roles in software engineering, data/ML engineering, or blockchain security.</p>
+    <div class="footer-links">
+      <a class="btn btn-primary" href="mailto:oluwafemipaul35@gmail.com">oluwafemipaul35@gmail.com</a>
+      <a class="btn btn-ghost" href="https://github.com/Pally-pal" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://x.com/lumenpally_pal" target="_blank" rel="noopener">X / @lumenpally_pal</a>
+      <a class="btn btn-ghost" href="https://app.notion.com/p/Paul-Oluwafemi-Oyelade-Portfolio-285a4c90cef480749f81e6900a8854d3?source=copy_link" target="_blank" rel="noopener">Case Studies (Notion)</a>
+      <a class="btn btn-ghost" href="./Paul_Oyelade_CV.docx" download>Download CV</a>
+    </div>
+    <div class="copyright">© 2026 Paul Oluwafemi Oyelade — Osogbo, Nigeria</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el=>io.observe(el));
+
+  // Hero parallax
+  const heroBg = document.getElementById('heroBg');
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      window.requestAnimationFrame(()=>{
+        const y = window.scrollY;
+        const shift = Math.min(y * 0.25, 160);
+        heroBg.style.transform = `translateY(${shift}px) scale(1.08)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', ()=>{
+    nav.style.background = window.scrollY > 40 ? 'rgba(11,24,21,0.85)' : 'rgba(11,24,21,0.55)';
+  });
+</script>
+
+</body>
+</html>
